@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, ArrowUpRight, Braces, Database, ExternalLink, Expand, Gauge, Layers, Linkedin, Quote, SkipForward, X } from "lucide-react";
+import { ArrowDownToLine, ArrowRight, ArrowUpRight, Braces, Database, ExternalLink, Expand, Gauge, Layers, Linkedin, Quote, SkipForward, X } from "lucide-react";
 import SheunShell, { SheunFooter } from "@/components/SheunShell";
 
-const face = "/manus-storage/WhatsAppImage2026-09-08at12.24.38AM_1f28b8d6.jpeg";
+const face = "/manus-storage/WhatsAppImage2026-09-08at12.24.38AM_1f28b8d6_b0d6761d.jpeg";
 const techVisual = "/manus-storage/sheun-tech-visual-b_8b466ce8_7efd897b.jpg";
 const heroLines = [
   "I build digital experiences that feel clear, useful and human. Then I teach other people how to build their own.",
@@ -127,7 +127,7 @@ export default function Home() {
               <h1>Welcome to<br />my <span>Portfolio.</span></h1>
               <p>I am <b>OYEDIRAN SHEUN</b></p>
               <p className="sheun-hero-detail" key={heroLine}>{heroLines[heroLine]}</p>
-              <div><a href="/projects.html">Explore my work <ArrowRight size={15} /></a><a href="/about.html">Know Sheun <ExternalLink size={14} /></a><a className="sheun-hero-connect" href="/contact.html">Hire/connect with Sheun <ArrowUpRight size={15} /></a></div>
+              <div><a href="/projects.html">Explore my work <ArrowRight size={15} /></a><a href="/oluwaseun-oyediran-resume.pdf" download="Oluwaseun-Oyediran-Resume.pdf">Download resume/CV <ArrowDownToLine size={14} /></a><a className="sheun-hero-connect" href="/contact.html">Hire/connect with Sheun <ArrowUpRight size={15} /></a></div>
             </div>
             <div className="sheun-hero-studio-panel" aria-label="Sheun's integrated practice">
               <div className="sheun-studio-topline"><span>SHEUN / FULL-STACK PRACTICE</span><span>LIVE PRACTICE</span></div>

@@ -909,3 +909,14 @@ h1 em, h2 em { color: var(--orange); font-style: normal; }
   .skills-node-map { height: 370px; transform: scale(.82); }
   .skills-node-detail { bottom: -30px; }
 }
+
+/* Final polish: keep constellation detail below the map and make the shared footer deliberate at desktop widths */
+.skills-node-map { min-height: 480px; }
+.skills-node-detail { bottom: -74px; }
+.sheun-page-footer { align-items: start; grid-template-columns: minmax(0, 1.35fr) minmax(150px, .72fr) minmax(190px, .9fr); }
+.sheun-footer-lead { max-width: 430px; }
+.sheun-footer-column { align-self: start; }
+.sheun-footer-column h3 { margin-bottom: 24px; }
+.sheun-footer-bottom { align-items: baseline; gap: 24px; }
+@media (max-width: 780px) { .skills-node-map { min-height: 410px; }.skills-node-detail { bottom: -58px; }.sheun-page-footer { align-items: start; grid-template-columns: 1.2fr 1fr; }.sheun-footer-lead { max-width: none; } }
+@media (max-width: 520px) { .skills-node-map { min-height: 385px; }.skills-node-detail { bottom: -48px; }.sheun-page-footer { grid-template-columns: 1fr 1fr; } }
