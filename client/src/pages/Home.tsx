@@ -3,7 +3,7 @@ import { ArrowRight, ArrowUpRight, Braces, Database, ExternalLink, Expand, Gauge
 import SheunShell, { SheunFooter } from "@/components/SheunShell";
 
 const face = "/manus-storage/WhatsAppImage2026-09-08at12.24.38AM_1f28b8d6.jpeg";
-const techVisual = "/manus-storage/sheun-tech-visual-b_8b466ce8.jpg";
+const techVisual = "/manus-storage/sheun-tech-visual-b_8b466ce8_7efd897b.jpg";
 const heroLines = [
   "I build digital experiences that feel clear, useful and human. Then I teach other people how to build their own.",
   "I turn thoughtful ideas into products people can actually use and return to.",
