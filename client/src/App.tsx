@@ -1,42 +1,34 @@
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { ThemeProvider } from "./contexts/ThemeContext";
+import Admin from "./pages/Admin";
+import Graphics from "./pages/Graphics";
 import Home from "./pages/Home";
-
+import NotFound from "./pages/NotFound";
+import Resume from "./pages/Resume";
+import { AboutPage, ContactPage, ProjectsPage, SkillsPage, TrainingPage } from "./pages/SheunPages";
 
 function Router() {
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
+      <Route path="/" component={Home} />
+      <Route path="/admin" component={Admin} />
+      <Route path="/graphics.html" component={Graphics} />
+      <Route path="/resume.html" component={Resume} />
+      <Route path="/about.html" component={AboutPage} />
+      <Route path="/skills.html" component={SkillsPage} />
+      <Route path="/projects.html" component={ProjectsPage} />
+      <Route path="/training.html" component={TrainingPage} />
+      <Route path="/contact.html" component={ContactPage} />
+      <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
-function App() {
+export default function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </ThemeProvider>
+      <Router />
     </ErrorBoundary>
   );
 }
-
-export default App;
