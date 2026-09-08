@@ -8,11 +8,10 @@ export default function SheunShell({ children, active }: { children: ReactNode; 
   const [menuOpen, setMenuOpen] = useState(false);
   const [avatarOpen, setAvatarOpen] = useState(false);
   const links = [
-    ["Home", "/"],
     ["About me", "/about.html"],
     ["Skills", "/skills.html"],
-    ["Design", "/graphics.html"],
     ["Projects", "/projects.html"],
+    ["Design", "/graphics.html"],
     ["Training", "/training.html"],
   ];
 
