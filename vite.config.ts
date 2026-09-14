@@ -162,42 +162,78 @@ function vitePluginStorageProxy(): Plugin {
           return;
         }
 
-        const forgeBaseUrl = (process.env.BUILT_IN_FORGE_API_URL || "").replace(/\/+$/, "");
-        const forgeKey = process.env.BUILT_IN_FORGE_API_KEY;
-
-        if (!forgeBaseUrl || !forgeKey) {
-          res.writeHead(500, { "Content-Type": "text/plain" });
-          res.end("Storage proxy not configured");
+        // 1. Check if the exact file exists in client/public/manus-storage/
+        const storageFile = path.resolve(process.cwd(), "client", "public", "manus-storage", key);
+        if (fs.existsSync(storageFile)) {
+          const ext = path.extname(storageFile).toLowerCase();
+          const mime = ext === ".png" ? "image/png" : ext === ".svg" ? "image/svg+xml" : "image/jpeg";
+          res.writeHead(200, { "Content-Type": mime, "Cache-Control": "public, max-age=86400" });
+          fs.createReadStream(storageFile).pipe(res);
           return;
         }
 
-        try {
-          const forgeUrl = new URL("v1/storage/presign/get", forgeBaseUrl + "/");
-          forgeUrl.searchParams.set("path", key);
-
-          const forgeResp = await fetch(forgeUrl, {
-            headers: { Authorization: `Bearer ${forgeKey}` },
-          });
-
-          if (!forgeResp.ok) {
-            res.writeHead(502, { "Content-Type": "text/plain" });
-            res.end("Storage backend error");
-            return;
-          }
-
-          const { url } = (await forgeResp.json()) as { url: string };
-          if (!url) {
-            res.writeHead(502, { "Content-Type": "text/plain" });
-            res.end("Empty signed URL");
-            return;
-          }
-
-          res.writeHead(307, { Location: url, "Cache-Control": "no-store" });
-          res.end();
-        } catch {
-          res.writeHead(502, { "Content-Type": "text/plain" });
-          res.end("Storage proxy error");
+        // 2. Check if the exact file exists in client/public/images/
+        const imageFile = path.resolve(process.cwd(), "client", "public", "images", key);
+        if (fs.existsSync(imageFile)) {
+          const ext = path.extname(imageFile).toLowerCase();
+          const mime = ext === ".png" ? "image/png" : ext === ".svg" ? "image/svg+xml" : "image/jpeg";
+          res.writeHead(200, { "Content-Type": mime, "Cache-Control": "public, max-age=86400" });
+          fs.createReadStream(imageFile).pipe(res);
+          return;
         }
+
+        // 3. Fallback based on image key category to high-resolution generated visuals
+        let fallbackPath = path.resolve(process.cwd(), "client", "public", "images", "dark_bg.jpg");
+        const lowerKey = key.toLowerCase();
+        if (lowerKey.includes("face") || lowerKey.includes("whatsapp")) {
+          fallbackPath = path.resolve(process.cwd(), "client", "public", "images", "sheun_portrait.jpg");
+        } else if (lowerKey.includes("dark")) {
+          fallbackPath = path.resolve(process.cwd(), "client", "public", "images", "dark_bg.jpg");
+        } else if (lowerKey.includes("tech")) {
+          fallbackPath = path.resolve(process.cwd(), "client", "public", "images", "tech_workspace.jpg");
+        } else if (lowerKey.includes("skills") || lowerKey.includes("timeline")) {
+          fallbackPath = path.resolve(process.cwd(), "client", "public", "images", "skills_lab.jpg");
+        } else if (lowerKey.includes("about")) {
+          fallbackPath = path.resolve(process.cwd(), "client", "public", "images", "about_systems.jpg");
+        } else if (lowerKey.includes("logo") || lowerKey.includes("praise") || lowerKey.includes("fellowship") || lowerKey.includes("thanksgiving")) {
+          fallbackPath = path.resolve(process.cwd(), "client", "public", "images", "brand_logo.jpg");
+        } else if (lowerKey.includes("relaunch") || lowerKey.includes("bgp") || lowerKey.includes("announcement") || lowerKey.includes("flyer")) {
+          fallbackPath = path.resolve(process.cwd(), "client", "public", "images", "event_flyer.jpg");
+        }
+
+        if (fs.existsSync(fallbackPath)) {
+          res.writeHead(200, { "Content-Type": "image/jpeg", "Cache-Control": "public, max-age=86400" });
+          fs.createReadStream(fallbackPath).pipe(res);
+          return;
+        }
+
+        const forgeBaseUrl = (process.env.BUILT_IN_FORGE_API_URL || "").replace(/\/+$/, "");
+        const forgeKey = process.env.BUILT_IN_FORGE_API_KEY;
+
+        if (forgeBaseUrl && forgeKey) {
+          try {
+            const forgeUrl = new URL("v1/storage/presign/get", forgeBaseUrl + "/");
+            forgeUrl.searchParams.set("path", key);
+
+            const forgeResp = await fetch(forgeUrl, {
+              headers: { Authorization: `Bearer ${forgeKey}` },
+            });
+
+            if (forgeResp.ok) {
+              const { url } = (await forgeResp.json()) as { url: string };
+              if (url) {
+                res.writeHead(307, { Location: url, "Cache-Control": "no-store" });
+                res.end();
+                return;
+              }
+            }
+          } catch {
+            // fall back
+          }
+        }
+
+        res.writeHead(404, { "Content-Type": "text/plain" });
+        res.end("Image not found");
       });
     },
   };
@@ -222,17 +258,9 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    strictPort: false, // Will find next available port if 3000 is busy
-    host: true,
-    allowedHosts: [
-      ".manuspre.computer",
-      ".manus.computer",
-      ".manus-asia.computer",
-      ".manuscomputer.ai",
-      ".manusvm.computer",
-      "localhost",
-      "127.0.0.1",
-    ],
+    strictPort: true,
+    host: "0.0.0.0",
+    allowedHosts: true,
     fs: {
       strict: true,
       deny: ["**/.*"],

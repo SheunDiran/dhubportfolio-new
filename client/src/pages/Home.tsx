@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { ArrowDownToLine, ArrowRight, ArrowUpRight, Braces, Database, ExternalLink, Expand, Gauge, Layers, Linkedin, Quote, SkipForward, Upload, X } from "lucide-react";
+import { ArrowDownToLine, ArrowRight, ArrowUpRight, Braces, Database, ExternalLink, Expand, Gauge, Layers, Linkedin, Quote, SkipForward, X } from "lucide-react";
 import SheunShell, { SheunFooter } from "@/components/SheunShell";
 
-const face = "/manus-storage/WhatsAppImage2026-09-08at12.24.38AM_1f28b8d6_b0d6761d.jpeg";
-const techVisual = "/manus-storage/sheun-tech-visual-b_8b466ce8_7efd897b.jpg";
+const face = "/images/sheun_portrait.jpg";
+const techVisual = "/images/tech_workspace.jpg";
 const heroLines = [
   "I build digital experiences that feel clear, useful and human. Then I teach other people how to build their own.",
   "I turn thoughtful ideas into products people can actually use and return to.",
@@ -24,7 +24,6 @@ export default function Home() {
   const [entry, setEntry] = useState(false);
   const [portraitOpen, setPortraitOpen] = useState(false);
   const [heroLine, setHeroLine] = useState(0);
-  const [frontImage, setFrontImage] = useState(() => localStorage.getItem("sheun-frontscreen-image") || "");
 
   useEffect(() => {
     const seen = sessionStorage.getItem("sheun-portfolio-entered") === "true";
@@ -63,22 +62,6 @@ export default function Home() {
     const timer = window.setInterval(() => setHeroLine((current) => (current + 1) % heroLines.length), 4200);
     return () => window.clearInterval(timer);
   }, []);
-
-  function handleFrontImage(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = String(reader.result);
-      try {
-        localStorage.setItem("sheun-frontscreen-image", result);
-        setFrontImage(result);
-      } catch {
-        window.alert("That image is too large for browser storage. Please choose a smaller image.");
-      }
-    };
-    reader.readAsDataURL(file);
-  }
 
   function enter() {
     sessionStorage.setItem("sheun-portfolio-entered", "true");
@@ -122,7 +105,14 @@ export default function Home() {
               <p>Beyond the code: the person, the teaching, the community and the thinking behind the work.</p>
               <div className="intro-entry-actions">
                 <button className="intro-entry-primary" type="button" onClick={enter}>Enter portfolio <ArrowRight size={15} /></button>
-                <button className="intro-entry-secondary" type="button" onClick={skipIntro}>Explore first <SkipForward size={14} /></button>
+                <a
+                  className="intro-entry-secondary"
+                  href="https://www.linkedin.com/feed/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View LinkedIn profile <Linkedin size={14} />
+                </a>
               </div>
               <span className="intro-entry-note">You can always start with the work.</span>
             </div>
@@ -131,31 +121,77 @@ export default function Home() {
 
         <main className="sheun-home">
           <section className="sheun-hero">
-            <div className="sheun-hero-media">
-              <button className="sheun-portrait-button" type="button" onClick={() => setPortraitOpen(true)} aria-label="Open Sheun's portrait">
-                <span className="sheun-portrait-ring" aria-hidden="true" />
-                <img src={face} alt="Oluwaseun Oyediran" />
-                <span className="sheun-portrait-expand"><Expand size={14} /> Tap to view</span>
-              </button>
-              <div className="sheun-hero-coordinate">SHEUN / 001<br />LAGOS, NIGERIA</div>
-            </div>
             <div className="sheun-hero-copy">
               <small>SOFTWARE ENGINEER / EDUCATOR / FOUNDER</small>
               <h1>Welcome to<br />my <span>Portfolio.</span></h1>
               <p>I am <b>OYEDIRAN SHEUN</b></p>
               <p className="sheun-hero-detail" key={heroLine}>{heroLines[heroLine]}</p>
-              <div><a href="/projects.html">Explore my work <ArrowRight size={15} /></a><a href="/oluwaseun-oyediran-resume.pdf" download="Oluwaseun-Oyediran-Resume.pdf">Download resume/CV <ArrowDownToLine size={14} /></a><a className="sheun-hero-connect" href="/contact.html">Hire/connect with Sheun <ArrowUpRight size={15} /></a></div>
-            </div>
-            <div className="sheun-hero-studio-panel" aria-label="Sheun's integrated practice">
-              {frontImage && <div className="sheun-frontscreen-art"><img src={frontImage} alt="Custom front-screen visual" /><button type="button" onClick={() => { localStorage.removeItem("sheun-frontscreen-image"); setFrontImage(""); }} aria-label="Remove custom front-screen visual"><X size={13} /></button></div>}
-              <label className="sheun-frontscreen-upload"><Upload size={13} /><span>{frontImage ? "Replace front-screen image" : "Add a front-screen image"}</span><input type="file" accept="image/*" onChange={handleFrontImage} /></label>
-              <div className="sheun-studio-topline"><span>SHEUN / FULL-STACK PRACTICE</span><span>LIVE PRACTICE</span></div>
-              <div className="sheun-orbit-stage">
-                <div className="sheun-orbit-ring sheun-orbit-ring-one" /><div className="sheun-orbit-ring sheun-orbit-ring-two" /><div className="sheun-orbit-core"><span>BUILD</span><span>THE</span><em>WHOLE</em><span>THING.</span></div>
-                <div className="sheun-orbit-node sheun-node-interface"><Layers size={17} /><span>INTERFACE</span></div><div className="sheun-orbit-node sheun-node-logic"><Braces size={17} /><span>LOGIC</span></div><div className="sheun-orbit-node sheun-node-data"><Database size={17} /><span>DATA</span></div><div className="sheun-orbit-node sheun-node-operations"><Gauge size={17} /><span>OPERATIONS</span></div>
+              <div className="sheun-hero-actions">
+                <a href="/projects.html">Explore my work <ArrowRight size={15} /></a>
+                <a href="/oluwaseun-oyediran-resume.pdf" download="Oluwaseun-Oyediran-Resume.pdf">Download CV <ArrowDownToLine size={14} /></a>
+                <a className="sheun-hero-connect" href="/contact.html">Hire/connect with Sheun <ArrowUpRight size={15} /></a>
               </div>
-              <div className="sheun-studio-metrics"><div><strong>30+</strong><span>developers trained</span></div><div><strong>05</strong><span>products shipped</span></div><div><strong>04</strong><span>systems profiled</span></div><div><strong>01</strong><span>integrated practice</span></div></div>
-              <div className="sheun-studio-marquee"><div className="sheun-marquee-track"><span>STRATEGY</span><i>•</i><span>SYSTEM DESIGN</span><i>•</i><span>BUILD</span><i>•</i><span>OPERATE</span><i>•</i><span>STRATEGY</span><i>•</i><span>SYSTEM DESIGN</span><i>•</i><span>BUILD</span><i>•</i><span>OPERATE</span><i>•</i></div></div>
+            </div>
+
+            <div className="sheun-hero-frontscreen" aria-label="Sheun's front screen showcase">
+              <div className="sheun-frontscreen-header">
+                <div className="sheun-frontscreen-pill">
+                  <span className="sheun-pulse-dot" />
+                  <span>OYEDIRAN SHEUN</span>
+                </div>
+                <span className="sheun-frontscreen-loc">LAGOS, NIGERIA · LIVE PRACTICE</span>
+              </div>
+
+              <div className="sheun-frontscreen-visual">
+                <button
+                  className="sheun-portrait-button"
+                  type="button"
+                  onClick={() => setPortraitOpen(true)}
+                  aria-label="Open Sheun's portrait"
+                >
+                  <span className="sheun-portrait-ring sheun-ring-outer" aria-hidden="true" />
+                  <span className="sheun-portrait-ring sheun-ring-inner" aria-hidden="true" />
+                  <img src={face} alt="Oluwaseun Oyediran — Software Engineer" />
+                  <span className="sheun-portrait-expand"><Expand size={13} /> Tap to expand</span>
+                </button>
+                <div className="sheun-floating-badge sheun-badge-top">
+                  <Layers size={13} />
+                  <span>FULL-STACK DEV</span>
+                </div>
+                <div className="sheun-floating-badge sheun-badge-bottom">
+                  <Database size={13} />
+                  <span>DIRAN HUB FOUNDER</span>
+                </div>
+              </div>
+
+              <div className="sheun-orbit-stage">
+                <div className="sheun-orbit-ring sheun-orbit-ring-one" />
+                <div className="sheun-orbit-ring sheun-orbit-ring-two" />
+                <div className="sheun-orbit-core">
+                  <span>BUILD</span>
+                  <span>THE</span>
+                  <em>WHOLE</em>
+                  <span>THING.</span>
+                </div>
+                <div className="sheun-orbit-node sheun-node-interface"><Layers size={15} /><span>INTERFACE</span></div>
+                <div className="sheun-orbit-node sheun-node-logic"><Braces size={15} /><span>LOGIC</span></div>
+                <div className="sheun-orbit-node sheun-node-data"><Database size={15} /><span>DATA</span></div>
+                <div className="sheun-orbit-node sheun-node-operations"><Gauge size={15} /><span>OPERATIONS</span></div>
+              </div>
+
+              <div className="sheun-studio-metrics">
+                <div><strong>30+</strong><span>developers trained</span></div>
+                <div><strong>05</strong><span>products shipped</span></div>
+                <div><strong>04</strong><span>systems profiled</span></div>
+                <div><strong>01</strong><span>integrated practice</span></div>
+              </div>
+
+              <div className="sheun-studio-marquee">
+                <div className="sheun-marquee-track">
+                  <span>STRATEGY</span><i>•</i><span>SYSTEM DESIGN</span><i>•</i><span>BUILD</span><i>•</i><span>OPERATE</span><i>•</i>
+                  <span>STRATEGY</span><i>•</i><span>SYSTEM DESIGN</span><i>•</i><span>BUILD</span><i>•</i><span>OPERATE</span><i>•</i>
+                </div>
+              </div>
             </div>
           </section>
           <section className="sheun-home-index" aria-label="Explore the portfolio">

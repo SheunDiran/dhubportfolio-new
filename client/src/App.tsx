@@ -1,7 +1,6 @@
-import { Route, Switch } from "wouter";
+import { Redirect, Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Admin from "./pages/Admin";
-import Graphics from "./pages/Graphics";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Resume from "./pages/Resume";
@@ -12,7 +11,10 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/admin" component={Admin} />
-      <Route path="/graphics.html" component={Graphics} />
+      <Route path="/graphics.html">
+        <Redirect to="/projects.html" />
+      </Route>
+      <Route path="/resume" component={Resume} />
       <Route path="/resume.html" component={Resume} />
       <Route path="/about.html" component={AboutPage} />
       <Route path="/skills.html" component={SkillsPage} />
