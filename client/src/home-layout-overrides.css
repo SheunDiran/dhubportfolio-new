@@ -1,22 +1,40 @@
-/* Homepage order: welcome first, systems panel second, technology snapshot third. */
-.sheun-hero {
-  grid-template-columns: minmax(0, 1fr) !important;
-}
+/* Homepage hierarchy: Welcome leads; desktop places the stack beside it; mobile stacks the systems panel before the stack card. */
 .sheun-hero-copy {
   grid-column: 1 !important;
   grid-row: 1 !important;
-  max-width: 860px;
-}
-.sheun-hero-frontscreen {
-  grid-column: 1 !important;
-  grid-row: 2 !important;
-}
-.sheun-hero-side {
-  grid-column: 1 !important;
-  grid-row: 3 !important;
-  justify-self: stretch;
-  min-height: 300px;
 }
 .sheun-frontscreen-visual {
   display: none !important;
+}
+@media (min-width: 781px) {
+  .sheun-hero {
+    grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr) !important;
+  }
+  .sheun-hero-side {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: stretch;
+  }
+  .sheun-hero-frontscreen {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+  }
+}
+@media (max-width: 780px) {
+  .sheun-hero {
+    grid-template-columns: 1fr !important;
+  }
+  .sheun-hero-copy {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+  .sheun-hero-frontscreen {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+  }
+  .sheun-hero-side {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    min-height: 300px;
+  }
 }
