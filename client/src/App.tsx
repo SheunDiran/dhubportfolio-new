@@ -1,4 +1,4 @@
-import { Redirect, Route, Switch } from "wouter";
+import { Redirect, Route, Router as WouterRouter, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Admin from "./pages/Admin";
 import Home from "./pages/Home";
@@ -7,8 +7,10 @@ import Resume from "./pages/Resume";
 import { AboutPage, ContactPage, ProjectsPage, SkillsPage, TrainingPage } from "./pages/SheunPages";
 
 function Router() {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   return (
-    <Switch>
+    <WouterRouter base={base}>
+      <Switch>
       <Route path="/" component={Home} />
       <Route path="/admin" component={Admin} />
       <Route path="/graphics.html">
@@ -23,7 +25,8 @@ function Router() {
       <Route path="/contact.html" component={ContactPage} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
-    </Switch>
+      </Switch>
+    </WouterRouter>
   );
 }
 
