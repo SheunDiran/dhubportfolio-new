@@ -3,6 +3,14 @@ import fs from "fs";
 import path from "path";
 
 async function generateResume() {
+  const uploadedResumePath = path.join(process.cwd(), "client/public/oluwaseun-oyediran-cv.pdf");
+  const downloadableResumePath = path.join(process.cwd(), "client/public/oluwaseun-oyediran-resume.pdf");
+  if (fs.existsSync(uploadedResumePath)) {
+    fs.copyFileSync(uploadedResumePath, downloadableResumePath);
+    console.log("Using uploaded CV as the downloadable resume.");
+    return;
+  }
+
   const pdfDoc = await PDFDocument.create();
   
   // Page size: Standard Letter (612 x 792 pt)
