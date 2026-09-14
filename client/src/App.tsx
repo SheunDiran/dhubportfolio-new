@@ -1,4 +1,4 @@
-import { Redirect, Route, Router as WouterRouter, Switch } from "wouter";
+import { Redirect, Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Admin from "./pages/Admin";
 import Home from "./pages/Home";
@@ -8,25 +8,24 @@ import { AboutPage, ContactPage, ProjectsPage, SkillsPage, TrainingPage } from "
 
 function Router() {
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const path = (value: string) => `${base}${value}` || "/";
   return (
-    <WouterRouter base={base}>
-      <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/admin" component={Admin} />
-      <Route path="/graphics.html">
-        <Redirect to="/projects.html" />
+    <Switch>
+      <Route path={path("/")} component={Home} />
+      <Route path={path("/admin")} component={Admin} />
+      <Route path={path("/graphics.html")}>
+        <Redirect to={path("/projects.html")} />
       </Route>
-      <Route path="/resume" component={Resume} />
-      <Route path="/resume.html" component={Resume} />
-      <Route path="/about.html" component={AboutPage} />
-      <Route path="/skills.html" component={SkillsPage} />
-      <Route path="/projects.html" component={ProjectsPage} />
-      <Route path="/training.html" component={TrainingPage} />
-      <Route path="/contact.html" component={ContactPage} />
-      <Route path="/404" component={NotFound} />
+      <Route path={path("/resume")} component={Resume} />
+      <Route path={path("/resume.html")} component={Resume} />
+      <Route path={path("/about.html")} component={AboutPage} />
+      <Route path={path("/skills.html")} component={SkillsPage} />
+      <Route path={path("/projects.html")} component={ProjectsPage} />
+      <Route path={path("/training.html")} component={TrainingPage} />
+      <Route path={path("/contact.html")} component={ContactPage} />
+      <Route path={path("/404")} component={NotFound} />
       <Route component={NotFound} />
-      </Switch>
-    </WouterRouter>
+    </Switch>
   );
 }
 
