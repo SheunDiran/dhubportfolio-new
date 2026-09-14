@@ -1,0 +1,47 @@
+name: Deploy portfolio to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps --ignore-scripts
+      - name: Build portfolio
+        run: npm run build:pages
+        env:
+          PAGES_BASE: /oluwaseunportfolio/
+      - name: Normalize root-relative portfolio links
+        run: |
+          find dist/public -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' \) -print0 | xargs -0 sed -i -E 's#(["'"'"'(])/(images|manus-storage|oluwaseun-oyediran|about|projects|skills|training|contact|resume|favicon|site-icon)#\1/oluwaseunportfolio/\2#g'
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/public
+      - name: Deploy to Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

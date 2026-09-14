@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 3000",
     "build": "tsx scripts/generate_resume.ts && vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+    "build:pages": "tsx scripts/generate_resume.ts && vite build",
     "start": "NODE_ENV=production node dist/index.js",
     "preview": "vite preview --host 0.0.0.0 --port 3000",
     "check": "tsc --noEmit",
