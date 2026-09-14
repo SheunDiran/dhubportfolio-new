@@ -1006,7 +1006,10 @@ footer.sheun-page-footer .sheun-footer-lead { grid-column: auto; max-width: 420p
 }
 .sheun-hero-frontscreen {
   align-self: stretch;
-  background: rgba(14, 30, 22, 0.75);
+  background-color: rgba(14, 30, 22, 0.58);
+  background-image: linear-gradient(90deg, rgba(14, 30, 22, 0.92), rgba(14, 30, 22, 0.48)), url('/images/dark_bg.jpg');
+  background-position: center;
+  background-size: cover;
   border: 1px solid rgba(215, 244, 103, 0.22);
   backdrop-filter: blur(12px);
   box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
