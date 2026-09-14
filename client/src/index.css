@@ -639,8 +639,8 @@ h1 em, h2 em { color: var(--orange); font-style: normal; }
 .sheun-home-cta h2 { margin-bottom: 0; }
 .sheun-home-cta a { align-items: center; border-bottom: 1px solid #17211c; color: #17211c; display: inline-flex; font-family: 'DM Mono', monospace !important; font-size: 10px; gap: 8px; padding: 8px 0; text-transform: uppercase; }
 .sheun-home-cta a:hover { color: #ff744a; }
-.sheun-page-footer { background: #101814; color: #fbfaf5; display: grid; gap: 50px 70px; grid-template-columns: 1.45fr .7fr .9fr; padding: 80px max(24px, calc((100% - 1160px) / 2)) 25px; position: relative; }
-.sheun-page-footer::before { display: none; }
+.sheun-page-footer { background: linear-gradient(90deg, rgba(10, 25, 18, .94), rgba(10, 25, 18, .68)), url('/images/tech_workspace.jpg') center/cover; color: #fbfaf5; display: grid; gap: 50px 70px; grid-template-columns: 1.45fr .7fr .9fr; padding: 80px max(24px, calc((100% - 1160px) / 2)) 25px; position: relative; }
+.sheun-page-footer::before { background: linear-gradient(180deg, rgba(5, 15, 11, .12), rgba(5, 15, 11, .38)); content: ''; inset: 0; pointer-events: none; position: absolute; }
 .sheun-footer-signal { display: flex; gap: 7px; position: absolute; right: max(24px, calc((100% - 1160px) / 2)); top: 30px; }
 .sheun-footer-signal span { background: #ff744a; height: 7px; transform: rotate(45deg); width: 7px; }.sheun-footer-signal span:nth-child(2) { background: #d7f467; }.sheun-footer-signal span:nth-child(3) { background: #7ad0db; }
 .sheun-footer-lead h2 { font-family: 'Space Grotesk', sans-serif !important; font-size: clamp(42px, 5vw, 69px); font-weight: 500; letter-spacing: -.075em; line-height: .92; margin: 24px 0 30px; }
