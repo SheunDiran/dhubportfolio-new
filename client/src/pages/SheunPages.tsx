@@ -3,7 +3,7 @@ import { ArrowRight, ArrowUpRight, Braces, CircleDot, Database, ExternalLink, La
 import SheunShell, { SheunFooter } from "@/components/SheunShell";
 
 const aboutHero = "/images/about_systems.jpg";
-const aboutSystems = "/images/tech_workspace.jpg";
+const aboutSystems = "/images/dark_bg.jpg";
 
 const projects = [
   ["OMAK LOGISTICS", "Full-Stack Developer", "April 2025", "Engineered and deployed a full-stack logistics web application enabling users to send and track parcels in real time, with rider workflows, secure authentication, role-based access and dynamic parcel status updates.", "https://omaklogistics.com/"],

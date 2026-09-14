@@ -924,7 +924,7 @@ h1 em, h2 em { color: var(--orange); font-style: normal; }
 
 /* Projects case-study experience */
 .projects-page { background: #f5f3eb; color: #17211c; overflow: hidden; }
-.projects-hero { background-color: #101c17; background-image: linear-gradient(90deg, rgba(16,28,23,.97) 0%, rgba(16,28,23,.84) 48%, rgba(16,28,23,.56) 100%), url('/images/about_systems.jpg'); background-position: center, center; background-size: cover; color: #f6f7ee; display: flex; justify-content: space-between; min-height: 560px; padding: 118px max(24px, calc((100% - 1160px) / 2)) 75px; position: relative; }
+.projects-hero { background-color: #101c17; background-image: linear-gradient(90deg, rgba(16,28,23,.97) 0%, rgba(16,28,23,.82) 48%, rgba(16,28,23,.42) 100%), url('/images/tech_workspace.jpg'); background-position: center, center; background-size: cover; color: #f6f7ee; display: flex; justify-content: space-between; min-height: 560px; padding: 118px max(24px, calc((100% - 1160px) / 2)) 75px; position: relative; }
 .projects-hero::after { background-image: linear-gradient(rgba(215,244,103,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(215,244,103,.07) 1px, transparent 1px); background-size: 42px 42px; content: ''; inset: 0; mask-image: linear-gradient(90deg, #000 15%, transparent 83%); pointer-events: none; position: absolute; }
 .projects-hero > div { position: relative; z-index: 1; }
 .projects-hero > div:first-child { max-width: 690px; }
