@@ -8,9 +8,11 @@
 }
 @media (min-width: 781px) {
   .sheun-hero {
+    display: grid !important;
     grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr) !important;
   }
   .sheun-hero-side {
+    display: flex !important;
     grid-column: 2 !important;
     grid-row: 1 !important;
     justify-self: stretch;
@@ -21,20 +23,58 @@
   }
 }
 @media (max-width: 780px) {
+  .sheun-home { overflow-x: hidden; }
   .sheun-hero {
+    display: grid !important;
+    flex-direction: initial !important;
+    gap: 24px !important;
     grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+    padding: 44px 18px 32px !important;
   }
   .sheun-hero-copy {
     grid-column: 1 !important;
     grid-row: 1 !important;
+    min-width: 0;
   }
+  .sheun-hero-copy h1 {
+    font-size: clamp(48px, 15vw, 72px) !important;
+    line-height: .9 !important;
+  }
+  .sheun-hero-copy > p { font-size: 20px !important; }
+  .sheun-hero-detail { font-size: 15px !important; max-width: 100%; }
+  .sheun-hero-actions { gap: 10px !important; }
+  .sheun-hero-actions a { font-size: 9px !important; padding: 12px 10px !important; }
   .sheun-hero-frontscreen {
     grid-column: 1 !important;
     grid-row: 2 !important;
+    min-height: 0 !important;
+    padding: 22px 14px !important;
+    width: 100% !important;
   }
+  .sheun-frontscreen-header { gap: 12px; }
+  .sheun-frontscreen-loc { font-size: 7px !important; text-align: right; }
+  .sheun-orbit-stage { height: 300px !important; }
+  .sheun-studio-metrics { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
   .sheun-hero-side {
+    display: flex !important;
     grid-column: 1 !important;
     grid-row: 3 !important;
     min-height: 300px;
+    min-width: 0;
+    padding: 18px !important;
+  }
+  .sheun-hero-side-screen { min-height: 120px; }
+  .sheun-stack-orbit { flex-wrap: wrap; justify-content: flex-end; max-width: 75%; }
+  .sheun-hero-side-copy strong { font-size: 38px !important; }
+  .whatsapp-float {
+    align-items: center !important;
+    bottom: max(16px, env(safe-area-inset-bottom)) !important;
+    display: flex !important;
+    height: 54px !important;
+    right: max(16px, env(safe-area-inset-right)) !important;
+    visibility: visible !important;
+    width: 54px !important;
+    z-index: 999 !important;
   }
 }
