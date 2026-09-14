@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { ArrowDownToLine, ArrowRight, ArrowUpRight, Braces, Database, Expand, Gauge, Layers, Linkedin, Quote, Server, SkipForward, X } from "lucide-react";
+import { ArrowDownToLine, ArrowRight, ArrowUpRight, Braces, Database, Gauge, Layers, Linkedin, Quote, Server, SkipForward } from "lucide-react";
 import SheunShell, { SheunFooter } from "@/components/SheunShell";
 
-const face = "/images/sheun_portrait.jpg";
 const techVisual = "/images/tech_workspace.jpg";
 const heroLines = [
   "I build digital experiences that feel clear, useful and human. Then I teach other people how to build their own.",
@@ -22,7 +21,6 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [entry, setEntry] = useState(false);
-  const [portraitOpen, setPortraitOpen] = useState(false);
   const [heroLine, setHeroLine] = useState(0);
 
   useEffect(() => {
@@ -49,14 +47,6 @@ export default function Home() {
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
   }, []);
-
-  useEffect(() => {
-    if (!portraitOpen) return;
-    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setPortraitOpen(false); };
-    document.addEventListener("keydown", closeOnEscape);
-    document.body.style.overflow = "hidden";
-    return () => { document.removeEventListener("keydown", closeOnEscape); document.body.style.overflow = ""; };
-  }, [portraitOpen]);
 
   useEffect(() => {
     const timer = window.setInterval(() => setHeroLine((current) => (current + 1) % heroLines.length), 4200);
@@ -155,28 +145,6 @@ export default function Home() {
                 <span className="sheun-frontscreen-loc">LAGOS, NIGERIA · LIVE PRACTICE</span>
               </div>
 
-              <div className="sheun-frontscreen-visual">
-                <button
-                  className="sheun-portrait-button"
-                  type="button"
-                  onClick={() => setPortraitOpen(true)}
-                  aria-label="Open Sheun's portrait"
-                >
-                  <span className="sheun-portrait-ring sheun-ring-outer" aria-hidden="true" />
-                  <span className="sheun-portrait-ring sheun-ring-inner" aria-hidden="true" />
-                  <img src={face} alt="Oluwaseun Oyediran — Software Engineer" />
-                  <span className="sheun-portrait-expand"><Expand size={13} /> Tap to expand</span>
-                </button>
-                <div className="sheun-floating-badge sheun-badge-top">
-                  <Layers size={13} />
-                  <span>FULL-STACK DEV</span>
-                </div>
-                <div className="sheun-floating-badge sheun-badge-bottom">
-                  <Database size={13} />
-                  <span>DIRAN HUB FOUNDER</span>
-                </div>
-              </div>
-
               <div className="sheun-orbit-stage">
                 <div className="sheun-orbit-ring sheun-orbit-ring-one" />
                 <div className="sheun-orbit-ring sheun-orbit-ring-two" />
@@ -220,7 +188,6 @@ export default function Home() {
           <section className="sheun-home-cta"><div className="sheun-cta-copy"><span className="sheun-home-kicker">THE SHORT VERSION</span><h2>Curious about<br /><em>the longer one?</em></h2><p>The work is only one layer. The longer story lives somewhere between building, learning, and helping good ideas find their feet.</p><div className="sheun-cta-links"><a href="/contact.html">Let's talk about it <ArrowUpRight size={16} /></a><a href="/oluwaseun-oyediran-resume.pdf" download="Oluwaseun-Oyediran-CV.pdf">View resume <ArrowDownToLine size={14} /></a><a href="https://www.linkedin.com/feed/" target="_blank" rel="noreferrer"><Linkedin size={14} /> LinkedIn</a></div></div><div className="sheun-cta-art"><img src={techVisual} alt="Laptop and green code reflections in a dark workspace" /><span>BUILD / LEARN / SHARE</span></div></section>
         </main>
         <SheunFooter />
-        {portraitOpen && <div className="portrait-lightbox" role="dialog" aria-modal="true" aria-label="Full portrait of Oluwaseun Oyediran" onMouseDown={(event) => event.target === event.currentTarget && setPortraitOpen(false)}><button type="button" onClick={() => setPortraitOpen(false)} aria-label="Close portrait"><X size={21} /></button><img src={face} alt="Full portrait of Oluwaseun Oyediran" /><span>ESC TO CLOSE / SHEUN 001</span></div>}
       </>
     </SheunShell>
   );

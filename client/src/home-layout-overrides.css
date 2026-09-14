@@ -1,0 +1,22 @@
+/* Homepage order: welcome first, systems panel second, technology snapshot third. */
+.sheun-hero {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+.sheun-hero-copy {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  max-width: 860px;
+}
+.sheun-hero-frontscreen {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+}
+.sheun-hero-side {
+  grid-column: 1 !important;
+  grid-row: 3 !important;
+  justify-self: stretch;
+  min-height: 300px;
+}
+.sheun-frontscreen-visual {
+  display: none !important;
+}
