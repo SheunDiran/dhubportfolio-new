@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowDownToLine, ArrowRight, ArrowUpRight, Braces, Database, Expand, Gauge, Layers, Linkedin, Quote, SkipForward, X } from "lucide-react";
+import { ArrowDownToLine, ArrowRight, ArrowUpRight, Braces, Database, Expand, Gauge, Layers, Linkedin, Quote, Server, SkipForward, X } from "lucide-react";
 import SheunShell, { SheunFooter } from "@/components/SheunShell";
 
 const face = "/images/sheun_portrait.jpg";
@@ -132,6 +132,19 @@ export default function Home() {
                 <a className="sheun-hero-connect" href="/contact.html">Hire/connect with Sheun <ArrowUpRight size={15} /></a>
               </div>
             </div>
+
+            <aside className="sheun-hero-side" aria-label="Technology stack snapshot">
+              <div className="sheun-hero-side-top"><span>THE BUILDING STACK / 01</span><i /></div>
+              <div className="sheun-hero-side-screen">
+                <span className="sheun-code-line"><b>01</b> const <em>usefulWork</em> = () =&gt; {'{'}</span>
+                <span className="sheun-code-line indent"><b>02</b> build(<strong>&quot;for people&quot;</strong>);</span>
+                <span className="sheun-code-line indent"><b>03</b> teach(<strong>&quot;what works&quot;</strong>);</span>
+                <span className="sheun-code-line"><b>04</b> {'}'}</span>
+                <div className="sheun-stack-orbit"><span><Braces size={15} /> CSS</span><span><Braces size={15} /> HTML</span><span><Database size={15} /> SQL</span><span><Server size={15} /> PYTHON</span></div>
+              </div>
+              <div className="sheun-hero-side-copy"><strong>CODE.<br /><em>CONNECT.</em><br />SHIP.</strong><p>Interfaces, logic, data and the systems that hold them together.</p></div>
+              <div className="sheun-hero-side-tags"><span>CSS / HTML</span><span>PYTHON / FLASK</span><span>SQL / DATABASE</span></div>
+            </aside>
 
             <div className="sheun-hero-frontscreen" aria-label="Sheun's front screen showcase">
               <div className="sheun-frontscreen-header">
